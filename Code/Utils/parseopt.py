@@ -1,21 +1,10 @@
-'''
-#!/usr/bin/env python
-# -*- coding: UTF-8 -*-
-=================================================
-@Project -> File   ：GraphSum -> parseopt
-@Author ：MollyShuu
-@Date   ：2021/4/21 22:11
-@IDE    ：PyCharm
-==================================================
-'''
-
 import argparse
 import json
 
 
 def common_opts(parser):
     parser.add_argument("-vocab", type=str, nargs="*", help="Vocab file")
-    parser.add_argument("-batch_size", type=int, default=8192, help="Batch size")  # EN2ZH 2048; ZH2EN 4096
+    parser.add_argument("-batch_size", type=int, default=8192, help="Batch size") 
     parser.add_argument("-beam_size", type=int, default=4, help="Beam size")
     parser.add_argument("-max_length", type=int, default=200, help="Maximum prediction length")
     parser.add_argument("-min_length", type=int, default=1, help="Minimum prediction length")
@@ -41,7 +30,7 @@ def train_opts(parser):
 def model_opts(parser):
     parser.add_argument("-layers", type=int, default=6, help="Number of layers")
     parser.add_argument("-heads", type=int, default=8, help="Number of heads")
-    parser.add_argument("-hidden_size", type=int, default=512, help="Size of hidden states")  # -hidden_size就是embed_dim
+    parser.add_argument("-hidden_size", type=int, default=512, help="Size of hidden states") 
     parser.add_argument("-ff_size", type=int, default=2048, help="Feed forward hidden size")
     parser.add_argument("-max_swords", type=int, default=80, help="max node words of sentence graph")
     parser.add_argument("-max_cwords", type=int, default=6, help="max node words of concepts graph")
@@ -75,7 +64,7 @@ def parse_translate_args():
 
 
 def parse_args(parser):
-    parser.add_argument("-config", type=str, default='/home/jsy/GraphSum/run_config/train-example4.json',
+    parser.add_argument("-config", type=str, default='../run_config/train-example.json',
                         help="Config file")
     opt = parser.parse_args()
     if opt.config:
