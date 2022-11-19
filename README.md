@@ -7,10 +7,9 @@
 The code for ClueGraphSum is being sorted and desensitized. We will publish it as soon as possible.
 
 ## CyEn2ZhSum-Dataset
-CyEn2ZhSum dataset is a cross-lingual summarization dataset. It is placed in the repertory ```./CyEn2ZhSum/```. 
+CyEn2ZhSum dataset is a cross-lingual summarization dataset about cybersecurity. It is placed in the repertory ```./CyEn2ZhSum/```. 
 
-It contains Chinese summaries, English articles,  publish dates, urls and  titles in English and Chinese of the news
-about cybersecurity. 
+It contains Chinese summaries, English articles,  publish dates, urls and  titles in English and Chinese of the news. 
 
 
 The columns are:
@@ -26,4 +25,4 @@ The columns are:
 | 6.     | `TITLE_EN`            | English titles of news       |             
 
 
-**Note that this dataset can only be used for academic research purposes.**
+**Note that this code and dataset can only be used for academic research purposes.**
