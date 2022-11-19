@@ -21,7 +21,7 @@ The columns are:
 | 2.     | `URL`                 | URL                          |   
 | 3.     | `SOURCE`              | Websites the news comes from |
 | 4.     | `SUMMARIES`           | Chinese summaries of the news|
-| 5.     | `ARTICLES`            | Original ontents of the news |
+| 5.     | `ARTICLES`            | News bodies in English       |
 | 6.     | `TITLE_EN`            | English titles of news       |             
 
 
