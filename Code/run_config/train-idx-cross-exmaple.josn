@@ -1,0 +1,36 @@
+{
+    "train": [
+        "path/GtrainALL_Source.json",
+        "path/GtrainALL_Target.json"
+    ],
+    "valid": [
+        "path/ Valid_Source.json",
+        "path/Valid_Target.json"
+    ],
+  "vocab": [
+    "path/VocabEn10W.txt",
+    "path/VocabZh5W.txt"
+  ],
+  "prob_idx_path": [
+    "path/prob_naive.pkl",
+    "path/idx_naive.pkl"
+  ],
+  "model_path": "./e2c_model/",
+  "train_from": None,
+  "layers":4,
+  "output": "./output/GraphSum_hypothesis.txt",
+  "ref": "./output/GraphSum_references.txt",
+  "heads": 8,
+  "dropout": 0.1,
+  "lr": 1,
+  "alpha": 0.01,
+  "ff_size": 2048,
+  "max_swords": 80,
+  "batch_size": 1024,
+  "warm_up": 16000,
+  "report_every": 100,
+  "save_every": 5000,
+  "max_to_keep": 10,
+  "embedding_dim": 512,
+  "tf": true
+}
