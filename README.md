@@ -4,7 +4,7 @@
 ### We share the CyEn2ZhSum dataset and code of "Clue-Guided Cross-Lingual Abstractive Summarization" here. 
 
 ## Code
-The code for ClueGraphSum is being sorted and desensitized. We will publish it as soon as possible.
+The code for ClueGraphSum is placed in the repertory ```./Code/```. 
 
 ## CyEn2ZhSum-Dataset
 CyEn2ZhSum dataset is a cross-lingual summarization dataset about cybersecurity. It is placed in the repertory ```./CyEn2ZhSum/```. 
