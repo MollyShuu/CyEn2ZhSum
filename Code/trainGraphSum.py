@@ -99,7 +99,6 @@ def train(model, criterion, optimizer, train_dataset, valid_dataset):
     model_path = opt.model_path
     model.zero_grad()
     for i, batch in enumerate(train_dataset):  
-        torch.cuda.empty_cache()  ###新加行
         scores = model(batch.Gsens, batch.Gsens_adjs, batch.Gcpts, batch.dec_inputs, batch.probs,
                        batch.idxes)
         loss = criterion(scores, batch.dec_inputs)
