@@ -1,13 +1,3 @@
-'''
-#!/usr/bin/env python
-# -*- coding: UTF-8 -*-
-=================================================
-@Project -> File   ：GraphSum -> metric.py
-@Author ：MollyShuu
-@Date   ：2021/4/22 15:02
-@IDE    ：PyCharm
-==================================================
-'''
 import os
 import re
 import subprocess
