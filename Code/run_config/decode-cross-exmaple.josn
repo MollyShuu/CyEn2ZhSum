@@ -1,0 +1,25 @@
+{
+    "vocab": [
+        "path/VocabEn10W.txt",
+        "path/VocabZh5W.txt"
+    ],
+    "prob_idx_path": [
+        "path/prob_naive.pkl",
+        "path/idx_naive.pkl"
+    ],
+    "model_path": "path/checkpoint-step-xxxxx",
+    "input": "path/Test_Source.json",
+    "truth": "path/Test_Target.json",
+    "output": "path/e2c_translate-candidates.txt",
+    "ref": "path/e2c_reference.txt",
+    "min_length": 10,
+    "max_length": 200,
+    "beam_size": 4,
+    "batch_size": 1024,
+    "max_swords": 80,
+    "embedding_dim": 512,
+    "length_penalty": 0.6,
+    "emd_type": 1,
+    "bleu": True,
+    "tf": False
+}
