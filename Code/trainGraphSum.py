@@ -71,20 +71,21 @@ def valid(model, criterion, valid_dataset, step):
         if opt.tf:
             _, predictions = scores.topk(k=1, dim=-1)
         else:
-            predictions = beam_search(opt, model, batch.src, valid_dataset.fields)
-
+            predictions = cross_beam_search(opt, model, batch.Gsens, batch.Gsens_adjs, batch.Gcpts, batch.probs,
+                                batch.idxes, fields)
         hypothesis += [valid_dataset.fields['tgt'].decode(p) for p in predictions]
         references += [valid_dataset.fields['tgt'].decode(t) for t in batch.dec_inputs]
     for i, line in enumerate(hypothesis):
         hypothesis[i] = zhchar(line)
         references[i] = zhchar(references[i])
+
     with open(opt.output, "w", encoding="UTF-8") as out_file:
         out_file.write("\n".join(hypothesis))
         out_file.write("\n")
     with open(opt.ref, "w", encoding="UTF-8") as out_file:
         out_file.write("\n".join(references))
         out_file.write("\n")
-    # bleu = 0
+
     bleu = calculate_bleu(hypothesis, references)
     logging.info("Valid loss: %.2f\tValid BLEU: %3.2f" % (total_loss / total, bleu))
     checkpoint = {"model": model.state_dict(), "opt": opt}
@@ -99,14 +100,14 @@ def train(model, criterion, optimizer, train_dataset, valid_dataset):
     model_path = opt.model_path
     model.zero_grad()
     for i, batch in enumerate(train_dataset):  
-        torch.cuda.empty_cache()  ###新加行
+        torch.cuda.empty_cache()  
         scores = model(batch.Gsens, batch.Gsens_adjs, batch.Gcpts, batch.dec_inputs, batch.probs,
                        batch.idxes)
         loss = criterion(scores, batch.dec_inputs)
         if hasattr(torch.cuda, 'empty_cache'):
             torch.cuda.empty_cache()
         loss.backward()
-        total_loss = total_loss + loss.item()  # loss.data
+        total_loss = total_loss + loss.item() 
 
         if (i + 1) % opt.grad_accum == 0:
             optimizer.step()
