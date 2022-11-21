@@ -1,5 +1,4 @@
-# pytorch==1.4  
-# python==3.6
+pytorch>=1.0, python==3.6
 
 1. Start training
 
