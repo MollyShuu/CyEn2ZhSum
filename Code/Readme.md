@@ -4,5 +4,6 @@ pytorch>=1.0, python==3.6
 
 CUDA_VISIBLE_DEVICES=0 python train.py -config run_config/train-cross-example.json
 
-1. Start decoding
+2. Start decoding
+
 CUDA_VISIBLE_DEVICES=0 python translate.py -config run_config/decode-cross-example.json
