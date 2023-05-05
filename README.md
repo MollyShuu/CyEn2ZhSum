@@ -1,7 +1,7 @@
 
-# Code and dataset for "Clue-Guided Cross-Lingual Abstractive Summarization"
+# Code and dataset for "DKCS: A Dual Knowledge-Enhanced Abstractive Cross-Lingual Summarization Method based on Graph Attention Networks"
 
-### We share the CyEn2ZhSum dataset and code of "Clue-Guided Cross-Lingual Abstractive Summarization" here. 
+### We share the CyEn2ZhSum dataset and code of DKCS here. 
 
 ## Code
 The code for ClueGraphSum is placed in the repertory ```./Code/```. 
