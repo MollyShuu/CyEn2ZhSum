@@ -1,14 +1,3 @@
-'''
-#!/usr/bin/env python
-# -*- coding: UTF-8 -*-
-=================================================
-@Project -> File   ：Pytorch -> util_base.py
-@Author ：MollyShuu
-@Date   ：2021/4/21 17:12
-@IDE    ：PyCharm
-==================================================
-'''
-# （三）util_base.py -*- coding: utf-8 -*-
 from gensim.models import KeyedVectors
 from dataset.dataset_base import TranslationDataset
 from dataset.filed_base import Field
@@ -56,7 +45,7 @@ def build_dataset(opt, data_path, vocab_path, device, prob_and_idx, vocab_src, v
 
         src_words = vocab_src.index2word
         tgt_words = vocab_tgt.index2word
-    # 词典
+
     src_field.load_vocab(src_words, src_special)
     tgt_field.load_vocab(tgt_words, tgt_special)
     src_field.load_trans_prob(prob_and_idx)
