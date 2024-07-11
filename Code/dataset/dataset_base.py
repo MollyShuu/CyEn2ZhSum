@@ -1,17 +1,3 @@
-'''
-#!/usr/bin/env python
-# -*- coding: UTF-8 -*-
-=================================================
-@Project -> File   ：Pytorch -> dataset_base.py
-@Author ：MollyShuu
-@Date   ：2021/4/21 17:09
-@IDE    ：PyCharm
-==================================================
-'''
-
-# （二）dataset_base.py -*- coding: utf-8 -*- 和 read_csv_file(path)，en_prepro(text)、zh_prepro(text)
-# 停用词路径:C:\Users\Administrator\AppData\Roaming\nltk_data\corpora\stopwords
-# 1为enc_inputs,2为dec_inputs,3为dec_outputs
 import random
 from collections import namedtuple
 from typing import Dict
@@ -63,11 +49,11 @@ class TranslationDataset(object):
                 examples.append(
                     Example(Gsen_vertex_features, concept, Gsen_adj_martix,
                             summary))
-        examples, self.seed = self.sort(examples)  # 将example按src的长短排序
+        examples, self.seed = self.sort(examples)  
         self.num_examples = len(examples)
-        self.batches = list(batch(examples, self.batch_size))  # 返回的是1个1个example
+        self.batches = list(batch(examples, self.batch_size)) 
 
-    def __iter__(self):  # # 迭代器，调用自身iter(f)，一般在循环里用
+    def __iter__(self):  
         while True:
             if self.train:
                 random.shuffle(self.batches)
@@ -87,14 +73,12 @@ class TranslationDataset(object):
                 #                                          self.max_cwords, prc_type=3)
                 yield Batch(Gsens=Gsen_feature_padded, Gcpts=Gcpt_feature_padded, Gsens_adjs=Gsen_adj_padded, dec_inputs=dec_inputs,
                             batch_size=len(minibatch), probs=probs, idxes=idxes)
-            logging.info("*****本批次所有数据训练完，开始循环*****")
-            if not self.train:  # 这里设计了train数据会一直循环
+            if not self.train:  
                 break
 
     def sort(self, examples):
         sort_key = lambda ex: (len(ex.Gsen_vertex_features), len(ex.Gcpt_vertex_features), len(ex.tgt))
         seed = sorted(range(len(examples)), key=lambda idx: sort_key(examples[idx]))
-        # 按Gsen的长度（及nodes/numsent数量）从小到大排序，idx为前面的参数range(len(examples))，以(len(ex.src), len(ex.tgt))为key
         return sorted(examples, key=sort_key), seed
 
 
@@ -107,7 +91,7 @@ def batch(data, batch_size):
         if cur_len > batch_size:
             yield minibatch
             minibatch, cur_len = [], max(len(ex.Gsen_vertex_features), len(ex.Gcpt_vertex_features), len(ex.tgt))
-        elif cur_len * len(minibatch) > batch_size:  # 如果cur_len一开始就大于了batch_size()则会返回空函数,所以加上上面的if语句
+        elif cur_len * len(minibatch) > batch_size:  
             yield minibatch[:-1]
             minibatch, cur_len = [ex], max(len(ex.Gsen_vertex_features), len(ex.Gcpt_vertex_features), len(ex.tgt))
     if minibatch:
