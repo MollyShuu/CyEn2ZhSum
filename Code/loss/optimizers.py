@@ -1,14 +1,3 @@
-'''
-#!/usr/bin/env python
-# -*- coding: UTF-8 -*-
-=================================================
-@Project -> File   ：GraphSum -> optimizers
-@Author ：MollyShuu
-@Date   ：2021/4/22 15:54
-@IDE    ：PyCharm
-==================================================
-'''
-# -*- coding: utf-8 -*-
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -70,26 +59,24 @@ class MSELoss(nn.Module):
 
 
 class SmoothL1Loss(nn.Module):
-    # SmoothL1Loss小于MSELoss
-    # 主要用于计算目标检测（如Fast-RCNN）中的位置偏差损失。相比于L1Loss，SmoothL1Loss对于差异在某个范围（比如1）之内的惩罚要更小，表明网络侧重于位置偏差过大的点，这主要是因为在目标检测网络中真实位置标签也可能存在一定的误差，而且评估标准采用的IOU门限一般为0.5，因此在一定范围内可以放宽要求。
-    def __init__(self, ignore_vec, sigma=1.0, reduce=False):
+     def __init__(self, ignore_vec, sigma=1.0, reduce=False):
         # https://blog.csdn.net/weixin_43593330/article/details/108165617
         super(SmoothL1Loss, self).__init__()
         self.sigma = sigma
         self.padding_vec = ignore_vec
-        # self.linear = nn.Linear(1, 1, bias=False)  # loss中的λ参数，自我学习
+        # self.linear = nn.Linear(1, 1, bias=False)  
 
     def forward(self, output, target):
         target = target.view(-1, target.size(-1))  # [batch_size*tgt_len,embedding_dim]
         output = output.view(-1, target.size(-1))  # [batch_size*tgt_len,embedding_dim]
-        non_pad_mask = target.ne(self.padding_vec)  # torch.tensor(pad_vecs["tgt"]),判断是否不相同
-        non_pad_mask = [True in vec for vec in non_pad_mask]  # [batch_size*tgt_len], 只要有1个维度不相同则不为pad
+        non_pad_mask = target.ne(self.padding_vec)  
+        non_pad_mask = [True in vec for vec in non_pad_mask]  
         beta = 1. / (self.sigma ** 2)
-        diff = (output - target).abs()[non_pad_mask].sum(dim=1)  # non_pad_mask里为false被删除了
+        diff = (output - target).abs()[non_pad_mask].sum(dim=1) 
         cond = diff < beta
         loss_word = torch.mean(torch.where(cond, 0.5 * diff ** 2 / beta, diff - 0.5 * beta))  # SmoothL1Loss
         loss_sen = sentence_simi(output, target)
-        # 从语义上，应该加上整句相似的惩罚
+      
         loss = loss_word - loss_sen
         return loss
 
@@ -98,7 +85,7 @@ class CosineSimilarityLoss(nn.Module):
     def __init__(self, ignore_vec):
         super(CosineSimilarityLoss, self).__init__()
         self.padding_vec = ignore_vec
-        self.linear = nn.Linear(1, 1, bias=False)  # loss中的λ参数，自我学习
+        self.linear = nn.Linear(1, 1, bias=False) 
         self.loss_fct = nn.MSELoss()
 
     def forward(self, output, target):
