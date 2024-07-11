@@ -1,13 +1,3 @@
-'''
-#!/usr/bin/env python
-# -*- coding: UTF-8 -*-
-=================================================
-@Project -> File   ：GraphSum -> saver
-@Author ：MollyShuu
-@Date   ：2021/4/21 22:10
-@IDE    ：PyCharm
-==================================================
-'''
 import json
 
 import torch
